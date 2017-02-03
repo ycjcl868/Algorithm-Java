@@ -1,9 +1,62 @@
-> 先来首音乐吧！
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=519118660&auto=1&height=90"></iframe>
+- [蓝桥杯练习系统](#%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%BB%83%E4%B9%A0%E7%B3%BB%E7%BB%9F)
+  - [入门训练](#%E5%85%A5%E9%97%A8%E8%AE%AD%E7%BB%83)
+  - [基础练习](#%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0)
+    - [BASIC-13 数列排序](#basic-13-%E6%95%B0%E5%88%97%E6%8E%92%E5%BA%8F)
+    - [BASIC-12 十六进制转八进制](#basic-12-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%85%AB%E8%BF%9B%E5%88%B6)
+    - [BASIC-11 十六进制转十进制](#basic-11-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E8%BF%9B%E5%88%B6)
+    - [BASIC-10 十进制转十六进制](#basic-10-%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6)
+    - [BASIC-9 特殊回文数](#basic-9-%E7%89%B9%E6%AE%8A%E5%9B%9E%E6%96%87%E6%95%B0)
+    - [BASIC-8 回文数](#basic-8-%E5%9B%9E%E6%96%87%E6%95%B0)
+    - [BASIC-7 特殊的数字](#basic-7-%E7%89%B9%E6%AE%8A%E7%9A%84%E6%95%B0%E5%AD%97)
+    - [BASIC-6 杨辉三角形](#basic-6-%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E5%BD%A2)
+    - [BASIC-5 查找整数](#basic-5-%E6%9F%A5%E6%89%BE%E6%95%B4%E6%95%B0)
+    - [BASIC-4 数列特征](#basic-4-%E6%95%B0%E5%88%97%E7%89%B9%E5%BE%81)
+    - [BASIC-3 字母图形](#basic-3-%E5%AD%97%E6%AF%8D%E5%9B%BE%E5%BD%A2)
+    - [BASIC-2 01字串](#basic-2-01%E5%AD%97%E4%B8%B2)
+    - [BASIC-1 闰年判断](#basic-1-%E9%97%B0%E5%B9%B4%E5%88%A4%E6%96%AD)
+    - [BASIC-30 阶乘计算](#basic-30-%E9%98%B6%E4%B9%98%E8%AE%A1%E7%AE%97)
+    - [BASIC-29 高精度加法](#basic-29-%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%8A%A0%E6%B3%95)
+    - [BASIC-28 Huffuman树](#basic-28-huffuman%E6%A0%91)
+    - [BASIC-27 2n皇后问题](#basic-27-2n%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98)
+    - [BASIC-26 报时助手](#basic-26-%E6%8A%A5%E6%97%B6%E5%8A%A9%E6%89%8B)
+    - [BASIC-25 回形取数](#basic-25-%E5%9B%9E%E5%BD%A2%E5%8F%96%E6%95%B0)
+    - [BASIC-24 龟兔赛跑预测](#basic-24-%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E9%A2%84%E6%B5%8B)
+    - [BASIC-23 芯片测试](#basic-23-%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95)
+    - [BASIC-22 FJ的字符串](#basic-22-fj%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2)
+    - [BASIC-21 Sine之舞](#basic-21-sine%E4%B9%8B%E8%88%9E)
+    - [BASIC-20 数的读法](#basic-20-%E6%95%B0%E7%9A%84%E8%AF%BB%E6%B3%95)
+    - [BASIC-19 完美的代价](#basic-19-%E5%AE%8C%E7%BE%8E%E7%9A%84%E4%BB%A3%E4%BB%B7)
+    - [BASIC-18 矩形面积交](#basic-18-%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4)
+    - [BASIC-17 矩阵乘法](#basic-17-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95)
+    - [BASIC-14 时间转换](#basic-14-%E6%97%B6%E9%97%B4%E8%BD%AC%E6%8D%A2)
+    - [BASIC-15 字符串对比](#basic-15-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E6%AF%94)
+    - [BASIC-16 分解质因数](#basic-16-%E5%88%86%E8%A7%A3%E8%B4%A8%E5%9B%A0%E6%95%B0)
+  - [算法训练](#%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83)
+    - [ALGO-1 区间k大数查询](#algo-1-%E5%8C%BA%E9%97%B4k%E5%A4%A7%E6%95%B0%E6%9F%A5%E8%AF%A2)
+    - [ALGO-2  最大最小公倍数](#algo-2--%E6%9C%80%E5%A4%A7%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0)
+    - [ALGO-3  K好数](#algo-3--k%E5%A5%BD%E6%95%B0)
+    - [ALGO-4  结点选择](#algo-4--%E7%BB%93%E7%82%B9%E9%80%89%E6%8B%A9)
+    - [ALGO-42 送分啦](#algo-42-%E9%80%81%E5%88%86%E5%95%A6)
+    - [ALGO-90 出现次数最多的整数](#algo-90-%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E6%95%B4%E6%95%B0)
+    - [ALGO-84 大小写转换](#algo-84-%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2)
+    - [ALGO-87  字串统计](#algo-87--%E5%AD%97%E4%B8%B2%E7%BB%9F%E8%AE%A1)
+    - [ALGO-95 2的次幂表示](#algo-95-2%E7%9A%84%E6%AC%A1%E5%B9%82%E8%A1%A8%E7%A4%BA)
+    - [ALGO-97 排序](#algo-97-%E6%8E%92%E5%BA%8F)
+    - [ALGO-101 图形显示](#algo-101-%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA)
+    - [ALGO-156 表达式计算](#algo-156-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97)
+  - [历届试题](#%E5%8E%86%E5%B1%8A%E8%AF%95%E9%A2%98)
+    - [PREV-1  核桃的数量](#prev-1--%E6%A0%B8%E6%A1%83%E7%9A%84%E6%95%B0%E9%87%8F)
+    - [PREV-2  打印十字图](#prev-2--%E6%89%93%E5%8D%B0%E5%8D%81%E5%AD%97%E5%9B%BE)
+    - [PREV-3  带分数](#prev-3--%E5%B8%A6%E5%88%86%E6%95%B0)
+- [剑指Offer](#%E5%89%91%E6%8C%87offer)
+  - [二维数组中的查找](#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE)
+  - [替换空格](#%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC)
 
-
-[toc]
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # 蓝桥杯练习系统
 
