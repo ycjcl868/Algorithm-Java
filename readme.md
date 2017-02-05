@@ -55,8 +55,16 @@
 - [剑指Offer](#%E5%89%91%E6%8C%87offer)
   - [二维数组中的查找](#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE)
   - [替换空格](#%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC)
+  - [从尾到头打印链表](#%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8)
+  - [重建二叉树](#%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+> 先来首音乐吧！       
+
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=519118660&auto=1&height=90"></iframe>
+
 
 # 蓝桥杯练习系统
 
@@ -1258,6 +1266,7 @@ public class Main {
             int temp = arr[i] + arr[i+1];
             arr[i+1] = temp;
             sum+=temp;
+            // [i+1,arr.length-1]
             arr = Arrays.copyOfRange(arr,i+1,arr.length);
         }
         System.out.println(sum);
@@ -3280,6 +3289,104 @@ public class Main {
     public static String replaceSpace(StringBuffer str) {
         String s = str.toString();
         return s.replaceAll(" ","%20");
+    }
+}
+```
+
+## 从尾到头打印链表
+
+```
+输入一个链表，从尾到头打印链表每个节点的值。
+```
+
+```java
+// 法一：
+/**
+*    public class ListNode {
+*        int val;
+*        ListNode next = null;
+*
+*        ListNode(int val) {
+*            this.val = val;
+*        }
+*    }
+*
+*/
+import java.util.ArrayList;
+public class Solution {
+    ArrayList<Integer> arrayList = new ArrayList<Integer>();
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        if(listNode!=null){
+            this.printListFromTailToHead(listNode.next);
+            arrayList.add(listNode.val);
+        }
+        return arrayList;
+
+    }
+}
+
+// 法二：
+/**
+*    public class ListNode {
+*        int val;
+*        ListNode next = null;
+*
+*        ListNode(int val) {
+*            this.val = val;
+*        }
+*    }
+*
+*/
+import java.util.ArrayList;
+import java.util.Stack;
+public class Solution {
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        Stack<Integer> stack = new Stack<>();
+        while (listNode!=null){
+            stack.push(listNode.val);
+            listNode = listNode.next;
+        }
+        ArrayList<Integer> list = new ArrayList<>();
+        while (!stack.isEmpty()){
+            list.add(stack.pop());
+        }
+        return list;
+
+    }
+}
+```
+
+
+## 重建二叉树
+
+```
+输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+```
+
+```java
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+import java.util.Arrays;
+public class Solution {
+    public TreeNode reConstructBinaryTree(int[] pre,int[] in){
+       if(pre.length == 0||in.length == 0){
+            return null;
+        }
+        TreeNode node = new TreeNode(pre[0]);
+        for(int i = 0; i < in.length; i++){
+            if(pre[0] == in[i]){
+                node.left = reConstructBinaryTree(Arrays.copyOfRange(pre, 1, i+1), Arrays.copyOfRange(in, 0, i));
+                node.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i+1, pre.length), Arrays.copyOfRange(in, i+1,in.length));
+            }
+        }
+        return node;
     }
 }
 ```
