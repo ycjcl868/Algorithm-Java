@@ -57,6 +57,10 @@
   - [替换空格](#%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC)
   - [从尾到头打印链表](#%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8)
   - [重建二叉树](#%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)
+  - [用两个栈实现队列](#%E7%94%A8%E4%B8%A4%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97)
+  - [旋转数组的最小数字](#%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97)
+  - [斐波那契数列](#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97)
+  - [互联网公司面试笔试题](#%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -3388,5 +3392,209 @@ public class Solution {
         }
         return node;
     }
+}
+```
+
+## 用两个栈实现队列
+```
+用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
+```
+
+```java
+import java.util.Stack;
+
+public class Solution {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+
+    public void push(int node){
+        stack1.push(node);
+    }
+    public int pop(){
+        while (!stack1.empty()){
+            stack2.push(stack1.pop());
+        }
+        int first = stack2.pop();
+        // 再压回来
+        while (!stack2.empty()){
+            stack1.push(stack2.pop());
+        }
+        return first;
+    }
+}
+```
+
+## 旋转数组的最小数字
+
+```
+把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
+输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。
+例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
+NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
+```
+
+```java
+// 二分法
+public static int minNumberInRotateArray(int[] array){
+    int low = 0;
+    int high = array.length - 1;
+    int mid = low;
+    while (low < high){
+        if(high - low == 1){
+            mid = high;
+            break;
+        }
+        mid = (low+high) / 2;
+        if(array[mid] >= array[low]){
+            low = mid;
+        }else if(array[mid] <= array[high]){
+            high = mid;
+        }
+    }
+    return array[mid];
+}
+```
+
+
+## 斐波那契数列
+
+```
+大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。
+n<=39
+```
+
+```java
+public int Fibonacci(int n) {
+    int[] result = {0,1};
+    if(n<2){
+        return result[n];
+    }
+    int fibNMinuxOne = 0;
+    int fibNMinuxTwo = 1;
+    int sum = 0;
+    for(int i = 2;i <= n;i++){
+        sum = fibNMinuxOne + fibNMinuxTwo;
+        fibNMinuxOne = fibNMinuxTwo;
+        fibNMinuxTwo = sum;
+    }
+    return sum;
+}
+```
+
+## 互联网公司面试笔试题
+
+```
+(2012年腾讯实习生笔试 加分题)
+给定一数组a[N]，我们希望构造数组b [N]，其中b[j]=a[0]*a[1]…a[N-1] / a[j]，在构造过程中，不允许使用除法：
+
+要求O（1）空间复杂度和O（n）的时间复杂度；
+除遍历计数器与a[N] b[N]外，不可使用新的变量（包括栈临时变量、堆空间和全局静态变量等）；
+实现程序（主流编程语言任选）实现并简单描述。
+```
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        /*
+        b[0] = a[1] * a[2] * a[3] * a[4]
+        b[1] = a[0] * a[2] * a[3] * a[4]
+        b[2] = a[0] * a[1] * a[3] * a[4]
+        b[3] = a[0] * a[1] * a[2] * a[4]
+        b[4] = a[0] * a[1] * a[2] * a[3]
+         */
+        final int MAX = 5;
+        int[] a = {1,2,3,4,5};
+        int[] b = new int[MAX];
+        b[0] = 1;
+
+        System.out.println("数组A:");
+        printArr(a,MAX);
+
+        /*
+        b[0] = 1
+        b[1] = a[0]
+        b[2] = a[0] * a[1]
+        b[3] = a[0] * a[1] * a[2]
+        b[4] = a[0] * a[1] * a[2] * a[3]
+         */
+        for(int i = 1;i < MAX;i++){
+            b[i] = b[i-1] * a[i-1];
+        }
+
+        /*
+        b[4] = b[4] * b[0] = a[0]*a[1]*a[2]*a[3], b[0] = a[4]
+        b[3] = b[3] * b[0] = a[0]*a[1]*a[2]*a[4], b[0] = a[4]*a[3]
+        b[2] = b[2] * b[0] = a[0]*a[1]*a[3]*a[4], b[0] = a[4]*a[3]*a[2]
+        b[1] = b[1] * b[0] = a[0]*a[2]*a[3]*a[4]
+
+         */
+        for(int i = MAX - 1;i >= 1;i--){
+            b[i] *= b[0];
+            b[0] *= a[i];
+        }
+
+        System.out.println("数组B: ");
+        printArr(b,MAX);
+
+
+    }
+    public static void printArr(int[] arr,int MAX){
+        for(int i=0;i<MAX;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+    }
+}
+```
+
+```
+构造回文
+题目描述
+
+给定一个字符串s，你可以从中删除一些字符，使得剩下的串是一个回文串。如何删除才能使得回文串最长呢？输出需要删除的字符个数。
+输入描述:输入数据有多组，每组包含一个字符串s，且保证:1<=s.length<=1000.
+输出描述:对于每组数据，输出一个整数，代表最少需要删除的字符个数。
+输入例子:
+abcdagoogle+
+
+输出例子:
+22
+```
+
+```java
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner in  = new Scanner(System.in);
+        while (in.hasNext()){
+            String str = in.next();
+            String reStr = new StringBuffer(str).reverse().toString();
+            char[] c1 = str.toCharArray();
+            char[] c2 = reStr.toCharArray();
+            int n = str.length();
+            int[][] dp = new int[n+1][n+1];
+
+            for(int i = 0;i < n;i++){
+                for(int j = 0;j < n;j++){
+                    if(c1[i] == c2[j]){
+                        dp[i+1][j+1] = dp[i][j] + 1;
+                    }else{
+                        dp[i+1][j+1] = Math.max(dp[i][j+1],dp[i+1][j]);
+                    }
+
+                }
+            }
+            System.out.println(n - dp[n][n]);
+
+        }
+
+
+    }
+
+
+
 }
 ```
