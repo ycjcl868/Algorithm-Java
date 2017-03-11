@@ -1221,7 +1221,7 @@ public class Main {
 ```
 
 
-### BASIC-28 Huffuman树  
+### BASIC-28 Huffuman树  (哈夫曼树)
 
 ```
 问题描述
@@ -3481,6 +3481,98 @@ public int Fibonacci(int n) {
 }
 ```
 
+
+## 跳台阶
+
+```
+一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+```
+
+
+```java
+public class Solution {
+    public int JumpFloor(int target) {
+      if(target == 1){
+            return 1;
+        }else if(target == 2){
+            return 2;
+        }
+        return JumpFloor(target-1) + JumpFloor(target-2);
+    }
+}
+```
+
+## 跳台阶2
+
+```
+一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+```
+
+```java
+public class Solution {
+    public int JumpFloorII(int target) {
+        if(target == 1){
+            return 1;
+        }else if(target<=0){
+            return -1;
+        }
+        return 2*JumpFloorII(target-1);
+    }
+}
+
+-------------- 解法二
+public class Solution {
+    public int JumpFloorII(int target) {
+        return 1<<--target;
+    }
+}
+```
+
+
+## 矩形覆盖
+
+```
+我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+```
+
+```java
+public static int RectCover(int target){
+    if(target <= 0){
+        return 0;
+    }else if(target == 1){
+        return 1;
+    }else if(target == 2){
+        return 2;
+    }else {
+        return RectCover(target-1)+RectCover(target-2);
+    }
+}
+```
+
+
+## 二进制中1的个数
+
+```
+输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。
+```
+
+```java
+public static int NumberOf1(int n){
+    int count = 0;
+    while (n != 0){
+        ++count;
+        // 相当于最后一位取反
+        n = (n-1) & n;
+    }
+    return count;
+}
+```
+
+
+
+
+
+
 ## 互联网公司面试笔试题
 
 ```
@@ -3565,6 +3657,9 @@ abcdagoogle+
 ```java
 import java.util.Scanner;
 
+/**
+ * 最大公共子序列问题(LCS)
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -3584,17 +3679,154 @@ public class Main {
                     }else{
                         dp[i+1][j+1] = Math.max(dp[i][j+1],dp[i+1][j]);
                     }
-
                 }
             }
             System.out.println(n - dp[n][n]);
 
         }
-
-
     }
+}
+```
 
 
+```
+算法基础-字符移位
+小Q最近遇到了一个难题：把一个字符串的大写字母放到字符串的后面，各个字符的相对位置不变，且不能申请额外的空间。
+你能帮帮小Q吗？
+
+输入描述:输入数据有多组，每组包含一个字符串s，且保证:1<=s.length<=1000.
+输出描述:对于每组数据，输出移位后的字符串。
+输入例子:AkleBiCeilD
+输出例子:kleieilABCD
+
+```
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while (in.hasNext()){
+            String s = in.next();
+            char[] str = s.toCharArray();
+
+            int i = str.length - 1;
+            // 大写字母
+            while (str[i] > 64 && str[i] < 97){
+                // 获取小写字母的index
+                i--;
+            }
+
+            // 冒泡
+            for(;i>=1;i--){
+                boolean flag = true;
+                for(int j = 1;j <= i;j++){
+                    // 如果是大写字母
+                    if(str[j-1] > 64 && str[j-1] < 97){
+                        // 如果是小写字母
+                        if(str[j] <= 64 || str[j] >= 97){
+                            char temp = str[j-1];
+                            str[j-1] = str[j];
+                            str[j] = temp;
+                            flag = false;
+                        }
+                    }
+                }
+                if(flag) break;
+            }
+            
+            System.out.println(new String(str));
+        }
+    }
+}
+```
+
+
+```
+小Q今天在上厕所时想到了这个问题：有n个数，两两组成二元组，差最小的有多少对呢？差最大呢？
+输入描述:
+输入包含多组测试数据。
+ 对于每组测试数据：
+ N - 本组测试数据有n个数
+ a1,a2...an - 需要计算的数据
+ 保证:
+ 1<=N<=100000,0<=ai<=INT_MAX.
+ 输出描述:对于每组数据，输出两个数，第一个数表示差最小的对数，第二个数表示差最大的对数。
+ 输入例子:
+ 6
+ 45 12 45 32 5 6
+
+ 输出例子:
+ 1 2
+
+```
+
+
+```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            int[] a = new int[n];
+            for(int i=0;i<n;i++){
+                a[i] = sc.nextInt();
+            }
+
+            Arrays.sort(a);
+            //如果数组中的值全相同，直接两两组合
+            if(a[0] == a[n-1]){
+                int tmp = (n*(n-1))/2;
+                System.out.println(tmp + " " + tmp);
+                continue;
+            }
+            //map用来统计
+            Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+            for(int i=0;i<n;i++){
+                if(map.containsKey(a[i]))
+                    map.put(a[i], map.get(a[i])+1);
+                else
+                    map.put(a[i], 1);
+            }
+            //求差最小个数
+            int minres = 0;
+            if(map.size() == n){
+                int min = Math.abs(a[1]-a[0]);
+                for(int i=2;i<n;i++){
+                    int tmp = Math.abs(a[i]-a[i-1]);
+                    if(tmp == min)
+                        minres++;
+                    else if(tmp < min){
+                        min = tmp;
+                        minres = 1;
+                    }
+                }
+            }else{
+                for(Integer key : map.keySet()){
+                    int val = map.get(key);
+                    if(val > 1){
+                        minres += (val * (val-1))/2;
+                    }
+                }
+            }
+            //求差最大个数
+            int maxres = 0;
+            List<Integer> keyset = new ArrayList<Integer>(map.keySet());
+            int val1 = map.get(keyset.get(0));
+            int val2 = map.get(keyset.get(keyset.size()-1));
+            maxres = val1 * val2;
+            System.out.println(minres + " " + maxres);
+        }
+    }
 
 }
 ```
